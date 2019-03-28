@@ -1,0 +1,120 @@
+.dyplom {
+    background: url(../../img/3-bg-1.jpg)no-repeat center center/cover;
+    background-size: 100% 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+.dyplom-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 80%;
+    padding: 50px 0 0 0;
+}
+
+
+.dyplom-block img {
+    display: block;
+    width: 300px;
+    height: 350px;
+    margin: 0 15px;
+}
+
+.dyplom-block img:hover {
+    cursor: pointer;
+    animation: wobbleud 0.5s linear infinite;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .3),
+    -23px 0 20px -23px rgba(0, 0, 0, .8),
+    23px 0 20px -23px rgba(0, 0, 0, .8),
+    0 0 40px rgba(0, 0, 0, .1) inset;
+}
+
+@keyframes wobbleud {
+    0% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0);
+
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    25% {
+        -webkit-transform: translateY(-5px);
+        -ms-transform: translateY(-5px);
+        -o-transform: translateY(-5px);
+        transform: translateY(-5px);
+
+        -webkit-transform: translateX(5px);
+        -ms-transform: translateX(5px);
+        -o-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+
+    75% {
+        -webkit-transform: translateY(5px);
+        -ms-transform: translateY(5px);
+        -o-transform: translateY(5px);
+        transform: translateY(5px);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+
+.ant-select-selection--single{
+    display: inline-block;
+    font-family: Poppins-Regular;
+    width: 100px;
+    background: #4665b8;
+    color:#fff;
+    outline:none;
+    border: none;
+}
+
+.ant-select-selection--single:hover{
+    background: #587cdd;
+}
+
+.ant-select-arrow{
+    color:#fff;
+}
+
+
+
+
+/************Responsive *****************/
+@media (max-width: 1024px) {
+    
+}
+
+@media(max-width: 992px) {
+    .dyplom-block img {
+        width: 30%;
+        height: 65%;
+    }
+}
+
+
+@media(max-width: 768px) {
+    .dyplom-block img {
+        width: 30%;
+        height: 55%;
+    }
+}
+
+@media (max-width: 670px) {
+    .dyplom-block img {
+        width: 30%;
+        height: 45%;
+    }
+}

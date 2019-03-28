@@ -1,0 +1,68 @@
+.top-btn{
+    position: fixed;
+    right: 3%;
+    bottom: 25px;
+    z-index: 99;
+}
+
+.btn-top{
+    padding: 14px 22px;
+    background-color: #4665b8;
+    border-radius: 100px;
+
+    font-size: 26px;
+    color: #fff;
+    word-spacing: 2px;
+    border: none;
+
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.btn-top:hover i{
+    cursor: pointer;
+    animation: jumpUpDown 0.5s linear infinite;
+}
+
+
+@keyframes jumpUpDown {
+    0% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0);
+
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    25% {
+        -webkit-transform: translateY(-3px);
+        -ms-transform: translateY(-3px);
+        -o-transform: translateY(-3px);
+        transform: translateY(-3px);
+
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    75% {
+        -webkit-transform: translateY(3px);
+        -ms-transform: translateY(3px);
+        -o-transform: translateY(3px);
+        transform: translateY(3px);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+}

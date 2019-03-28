@@ -1,0 +1,138 @@
+.feedback {
+    background: #000;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrap-form {
+    background: #132f8d;
+    width: 70%;
+    border-radius: 5px;
+    text-align: center;
+    height: 70%;
+}
+
+.feedback-title {
+    font-family: 'Exo 2', sans-serif;
+    padding: 40px 0;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url(../../../img/form-bg-01.jpg);
+}
+
+.feedback-title::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(54, 84, 99, 0.7);
+}
+
+.write-me {
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.some-question {
+    color: #fff;
+    padding-top: 10px;
+}
+
+.feedback-form {
+    height: 60%;
+    padding-top: 10%;
+    color: #000;
+    font-family: 'Exo 2', sans-serif;
+    background: #fff;
+}
+
+.wrap-inpt {
+    padding-bottom: 30px;
+    text-align: right;
+    padding-right: 15%;
+}
+
+.label-form {
+    text-align: right;
+}
+
+.exept {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.feedback-inp {
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    color: #000;
+    margin-left: 20px;
+    width: 50%;
+    transition: all 1s ease;
+}
+
+.feedback-form-error{
+    font-size:13px;
+    padding-top:20px;
+    color:#b54444;
+    font-weight:bold;
+    padding-right: 20px;
+    padding-right: 20px;
+    margin-left: 48%;
+    text-align: left;
+}
+
+.clearPhone:hover{
+    cursor:pointer;
+}
+
+.feedback-inp:focus {
+    border-bottom: 2px solid #4665b8;
+}
+.feedback-form-btn {
+    padding: 0 20px;
+    min-width: 160px;
+    height: 50px;
+    background-color: #4665b8;
+    border-radius: 25px;
+
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    border: none;
+    margin-bottom: 20px;
+
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.feedback-form-btn i {
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    margin-left:10px;
+}
+
+.feedback-form-btn:hover {
+    cursor: pointer;
+}
+
+.feedback-form-btn:hover i {
+    cursor: pointer;
+    animation: jumpRigthLeft 0.5s linear infinite;
+}

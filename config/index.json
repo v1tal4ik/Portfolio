@@ -1,0 +1,14 @@
+{
+    "mail": {
+        "subject": "Повідомлення з сайту v1tal4ik",
+        "smtp":{
+            "host": "smtp.gmail.com",
+            "port":465,
+            "secure": true,
+            "auth":{
+                "user":"sendermessagers@gmail.com",
+                "pass":"vetal155811"
+            }
+        }
+    }
+}
