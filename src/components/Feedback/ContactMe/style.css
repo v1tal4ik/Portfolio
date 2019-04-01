@@ -13,6 +13,10 @@
     height: 70%;
 }
 
+.wait{
+    cursor:wait !important;
+}
+
 .feedback-title {
     font-family: 'Exo 2', sans-serif;
     padding: 40px 0;

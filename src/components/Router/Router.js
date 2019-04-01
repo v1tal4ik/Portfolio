@@ -1,5 +1,6 @@
 import React ,{ Component }from 'react';
 import {BrowserRouter,Route,Redirect,Switch} from 'react-router-dom';
+import {Lines} from 'react-preloaders';
 import Login from '../Login';
 import App from '../App';
 
@@ -11,6 +12,7 @@ class Router extends Component{
     render(){
         return (
             <BrowserRouter>
+            <Lines />
             <Switch>
                 <Route path='/' component={App}  exact/>
                 <Route path='/login' component={Login}  exact/>

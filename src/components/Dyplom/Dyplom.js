@@ -46,7 +46,6 @@ export default class Dyplom extends React.Component{
         const srcJS = `../../img/duploms/duplom-1-${language}.png`
         const srcReact = `../../img/duploms/duplom-2-${language}.png`
         const srcNode = `../../img/duploms/duplom-3-${language}.png`
-        console.log(srcJS);
         return (
             <Fragment>
             <div className="dyplom" id="certificates">

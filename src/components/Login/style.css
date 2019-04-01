@@ -427,6 +427,14 @@ iframe {
 }
 
 
+.login-form-error{
+    font-size:13px;
+    padding-top:20px;
+    color:#b54444;
+    font-weight:bold;
+    padding-bottom: 20px;
+}
+
 /*------------------------------------------------------------------
 [ Button ]*/
 

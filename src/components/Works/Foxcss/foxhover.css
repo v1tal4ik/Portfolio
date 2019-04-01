@@ -1,0 +1,226 @@
+/* Common styles */
+
+.effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.effect a {
+  text-decoration: none !important;
+}
+
+.effect img {
+ 
+}
+
+
+.effect .caption {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  background: rgba(0,0,0,0.7);
+  width: 80%;
+  height: 70%;
+  color: #fff;
+  text-align: center;
+  font-family: 'Lato', sans-serif; /* replace with your own font-family if you want */
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  align-items: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  z-index: 1;
+}
+
+.effect .caption h4 {
+  font-family: 'Montserrat', sans-serif; /* replace with your own font-family if you want */
+  margin: 0px;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 20px;
+  margin-top:3%;
+  position: relative;
+}
+
+.effect .caption h4:before,
+.effect .caption h4:after {
+  content: "";
+  display: block;
+  height: 2px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: #fff;
+}
+
+.effect .caption h4:before {
+  width: 40px;
+  bottom: 10px;
+}
+
+.effect .caption h4:after {
+  width: 20px;
+  bottom: 5px;
+}
+
+.effect .caption .text {
+  margin: 0px;
+  padding: 0px 20px;
+  font-size: 16px;
+  line-height: 22px;
+  position: relative;
+  width: 100%;
+}
+
+.effect .caption .text p {
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
+
+.effect .caption .text p:last-child {
+  margin-bottom: 0px;
+}
+
+.works-block-btn{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.effect .caption a.btn {
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 10px 20px 12px 20px;
+  margin-right:17px;
+  background-color: transparent;
+  transition: background 0.2s linear 0s;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.effect .caption a.btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+
+/* effect #5 styles */
+
+.effect.eff-5 .caption {
+  opacity: 0;
+}
+
+.effect.eff-5 .caption h4,
+.effect.eff-5 .caption a.btn {
+  opacity: 0;
+  -moz-transition: all 0.2s linear 0.1s;
+  -webkit-transition: all 0.2s linear 0.1s;
+  transition: all 0.2s linear 0.1s;
+}
+
+.effect.eff-5 .caption h4 {
+  top: -72px;
+}
+
+.effect.eff-5 .caption a.btn {
+  top: 72px;
+}
+
+.effect.eff-5:hover .caption {
+  opacity: 1;
+  -moz-transition: all 0.5s linear 0s;
+  -webkit-transition: all 0.5s linear 0s;
+  transition: all 0.5s linear 0s;
+}
+
+.effect.eff-5:hover .caption h4,
+.effect.eff-5:hover .caption a.btn {
+  opacity: 1;
+  top: 0;
+}
+
+
+  /* overlay styles */
+.effect.eff-20:before,
+.effect.eff-20:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 50%;
+  background-color: rgba(0,0,0,0.6);
+  position: absolute;
+  left: 0;
+  -moz-transition: all 0.2s linear 0.3s;
+  -webkit-transition: all 0.2s linear 0.3s;
+  transition: all 0.2s linear 0.3s;
+  z-index: 1;
+}
+
+.effect.eff-20:before {
+  top: -100%;
+}
+
+.effect.eff-20:after {
+  top: 100%;
+}
+
+.effect.eff-20:hover:before {
+  top: 0;
+}
+
+.effect.eff-20:hover:after {
+  top: 50%;
+}
+
+.effect.eff-20:hover:before,
+.effect.eff-20:hover:after {
+  -moz-transition: all 0.2s linear 0s;
+  -webkit-transition: all 0.2s linear 0s;
+  transition: all 0.2s linear 0s;
+}
+
+.effect.eff-20:hover .caption {
+  top: 0;
+  -moz-transition: all 0.2s linear 0.3s;
+  -webkit-transition: all 0.2s linear 0.3s;
+  transition: all 0.2s linear 0.3s;
+}
+
+/**********response ********/
+
+
+@media(max-width: 992px) {
+  .effect .caption h4 {
+    font-size: 16px;
+  }
+  .effect .caption a.btn{
+    padding: 5px 10px 6px 10px;
+    margin-bottom: 10px;
+  }
+}
+
+
+@media(max-width: 768px) {
+  .effect .caption h4 {
+    font-size: 14px;
+  }
+  .effect .caption a.btn{
+    padding: 5px 10px 6px 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 670px) {
+
+}

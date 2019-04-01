@@ -16,6 +16,7 @@ export default class ContactMe extends React.Component{
         close:'',
         counter:0,
         response:'',
+        class:"wrap-form",
         visible:false,
         isOpen:false,
         height:150,
@@ -98,7 +99,7 @@ export default class ContactMe extends React.Component{
         });
     }
     handleSend=(e)=>{
-        console.log(this.state); 
+        this.setState({class:"wrap-form wait"})
         const {name,email,phone,message,errorEmail,errorPhone} = this.state;
         if(errorEmail !=='' || errorPhone !==''){
             e.preventDefault();
@@ -120,6 +121,7 @@ export default class ContactMe extends React.Component{
                 .then((response)=>{
                     this.setState({
                         response:response.data,
+                        class:"wrap-form",
                         clearAll:true
                     });
                     this.showFeedback();
@@ -127,6 +129,7 @@ export default class ContactMe extends React.Component{
                   .catch((error)=>{
                     this.setState({
                         response:error,
+                        class:"wrap-form",
                         clearAll:true
                     });
                     this.showFeedback();
@@ -167,7 +170,7 @@ export default class ContactMe extends React.Component{
     render(){
         return (
             <Fragment>
-                 <div className="wrap-form">
+                 <div className={this.state.class}>
                 <div className="feedback-title" >
                     <p className="write-me">Напишіть мені</p>
                     <p className="some-question">Якщо у Вас виникли будь-які питання</p>

@@ -4,6 +4,17 @@ import './util.css'
 import './style.css';
 
 export default class Login extends React.Component{
+
+	state={
+		errorLogin:''
+	}
+
+	handleLogin=(e)=>{
+		e.preventDefault();
+		this.setState({
+			errorLogin:'* Невірний логін або пароль'
+		})
+	}
     render(){
         return (
             <div className="login">
@@ -30,24 +41,25 @@ export default class Login extends React.Component{
 
 						<div className="login-form-addition">
 							<input className="login-form-checkbox" id="login-remember-me" type="checkbox" name="remember-me" />
-							<label className="label-login-form-checkbox" for="login-remember-me">
+							<label className="label-login-form-checkbox" htmlFor="login-remember-me">
 								Remember me
 							</label>
 							<div className="login-forgot">
-							<a className="chekbox" href="http://cfv">
+							<a className="chekbox" href="#">
 								Forgot Password?
 							</a>
 						</div>
 						</div>
+						<p className='login-form-error'>{this.state.errorLogin}</p>
 						<div className="container-login-form-btn">
-							<button className="login-form-btn">
-								Login <i class="fal fa-sign-in"></i>
+							<button className="login-form-btn" onClick={this.handleLogin}>
+								Login <i className="fal fa-sign-in"></i>
 							</button>
 						</div>
 					</form>
 				</div>
 				<div className="prev-block">
-				<Link to='/app'><a className="prev-arrow" href='#welcome'>&shy;<i className="fa fa-arrow-left" aria-hidden="true"></i></a></Link>
+				<Link to='/'><a className="prev-arrow" href='/'>&shy;<i className="fa fa-arrow-left" aria-hidden="true"></i></a></Link>
 				</div>
 			</div>
 	</div>

@@ -31,3 +31,7 @@
     width:80%;
     height:60%;
 }
+
+.btn:hover{
+    cursor:pointer;
+}

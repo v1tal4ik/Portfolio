@@ -26,7 +26,7 @@ export default class Resume extends React.Component{
                     <ul className="hard-skill">
                         <li className="hard-skills">Знання HTML5, CSS3, Bootsrap, jQuery</li>
                         <li className="hard-skills">Нативний JavaScript</li>
-                        <li className="hard-skills">EcmaScript 6, AJAX, ООП, MV*, модулі</li>
+                        <li className="hard-skills">EcmaScript 6, AJAX, ООП</li>
                         <li className="hard-skills">Досвід роботи з Framework React + Redux, Redux-Saga</li>
                         <li className="hard-skills">Впевнені знання Node.JS та розробки REST API</li>
                         <li className="hard-skills">Досвід роботи з Framework Express.js , Koa.js</li>

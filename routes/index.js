@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
+const config = require('../config');
+const nodemailer = require('nodemailer');
 const router = express.Router();
-const controllers = require('../controllers');
 
 
 router.post('/send-message',(req, res, next)=>{

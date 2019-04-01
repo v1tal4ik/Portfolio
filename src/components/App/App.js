@@ -8,9 +8,9 @@ import Works from '../Works';
 import Feedback from '../Feedback';
 import Footer from '../Footer';
 
-export default class App extends React.Component{   
+export default class App extends React.Component{
     render(){
-        return (
+          return (
             <Fragment>
                 <TopHeader />
                 <ButtonToTop />
