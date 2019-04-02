@@ -192,7 +192,7 @@ export default class Works extends React.Component{
                                 <h4>Geo-feedback</h4>
                                 <div className="works-block-btn">
                                     <a className="btn" onClick={this.showMore} title="geoFeedback">More</a>
-                                    <a className="btn" href='/geo-feedback/index.html' target="_blank" rel="noopener noreferrer">Open</a>
+                                    <a className="btn" href='/geoFeedback/index.html' target="_blank" rel="noopener noreferrer">Open</a>
                                 </div>
                             </div>
                         </div>
@@ -240,7 +240,7 @@ export default class Works extends React.Component{
                                 <h4>Friend-filter</h4>
                                 <div className="works-block-btn">
                                     <a className="btn" onClick={this.showMore} title="friendFilter">More</a>
-                                    <a className="btn" href='/friend-filter/index.html' target="_blank">Open</a>
+                                    <a className="btn" href='/friendFilter/index.html' target="_blank">Open</a>
                                 </div>
                             </div>
                         </div>
