@@ -105,13 +105,31 @@
 
     .hard-skill{
         max-height:240px;
-        overflow: scroll;
+        overflow-Y: scroll;
         padding-top:15px;
         padding-bottom:15px;
+    }
+
+    .hard-skill::-webkit-scrollbar-track
+    {   
+	    -webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0.3);
+	    background-color: #fff;
+    }
+
+    .hard-skill::-webkit-scrollbar
+    {
+	width: 6px;
+	background-color: #fff;
+    }
+
+    .hard-skill::-webkit-scrollbar-thumb
+    {
+	    background-color: #d6d6d6;
     }
     .hard-skills{
         margin-left: 17px;
     }
+    
 }
 
 

@@ -2,15 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 const app = express();
 
 
 app.use(express.static(path.join(__dirname, './build')))
     .use('/smitter',express.static(path.join(__dirname,'./build/projects/Smitter/')))
-    .use('/geo-feedback',express.static(path.join(__dirname,'./build/projects/Geo-feedback/')))
-    .use('/friend-filter',express.static(path.join(__dirname,'./build/projects/Friends-filter/')))
+    .use('/geo-feedback',express.static(path.join(__dirname,'./build/projects/Geoooooo-Coment/')))
+    .use('/friend-filter',express.static(path.join(__dirname,'./build/projects/friend_filter.com/')))
     .use(bodyParser.urlencoded({
         extended: false
     }))
