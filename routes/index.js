@@ -19,7 +19,8 @@ ${message}`
     }
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
-            res.status(201).json('На жаль сталася помилка:(');
+            console.log(error);
+            res.status(201).json('На жаль сталася помилка:( Можливо увімк VPN!');
         }else{
             res.status(201).json("Ваше повідомлення було успішно відправлено");
         }
