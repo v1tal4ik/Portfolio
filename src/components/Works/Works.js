@@ -247,12 +247,12 @@ export default class Works extends React.Component{
                     </div>
                     <div className="works-item">
                         <div className="effect eff-5">
-                            <img src="../../img/beautiful-feedback.png" alt="Your own text" />
+                            <img src="../../img/beautiful-feedback.png" alt="Smitter" />
                             <div className="caption">
                                 <h4>Smitter</h4>
                                 <div className="works-block-btn">
                                     <a className="btn" onClick={this.showMore} title="smitter">More</a>
-                                    <a className="btn" href='/smitter/index.html' target="_blank" title="View More">Open</a>
+                                    <a className="btn" href='/smitter/index.html' target="_blank">Open</a>
                                 </div>
                             </div>
                         </div>
