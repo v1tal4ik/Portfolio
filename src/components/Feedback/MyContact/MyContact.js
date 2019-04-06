@@ -21,9 +21,9 @@ export default class MyContact extends React.Component{
                 </div>
                 <div className="contact-block">
                     <i className="fas fa-envelope"></i>
-                    <div className="contact-text">
+                    <div className="contact-text exept-mail">
                         <h4>Email</h4>
-                        <p>vetalgta@gmail.com</p>
+                        <p>vitalii.suhodolskiy@gmail.com </p>
                     </div>
                 </div>
             </div>

@@ -49,3 +49,16 @@
     color: #999999;
     padding-top: 20px;
 }
+
+
+
+
+
+/************Responsive *****************/
+@media(max-width: 992px) {
+    .exept-mail p{
+    width:65%;
+    word-wrap: break-word;
+    }
+}
+
