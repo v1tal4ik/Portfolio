@@ -17,7 +17,8 @@
     "react-preloaders": "^2.1.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "rodal": "^1.6.3"
+    "rodal": "^1.6.3",
+    "dotenv": "^7.0.0"
   },
   "scripts": {
     "starts": "react-scripts start",

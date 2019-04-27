@@ -1,17 +1,24 @@
 const express = require('express');
-const path = require('path');
-const config = require('../config');
 const nodemailer = require('nodemailer');
 const router = express.Router();
+require('dotenv').config();
 
 
 router.post('/send-message',(req, res, next)=>{
     const {name,email,phone,message} = req.body;
-    const transporter = nodemailer.createTransport(config.mail.smtp);
+    const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+                port:465,
+                secure: true,
+                auth:{
+                    user:process.env.USER,
+                    pass:process.env.PASS
+                }
+    });
     const mailOptions = {
         from: `"${name}"`,
-        to: config.mail.smtp.auth.user,
-        subject:config.mail.subject,
+        to: process.env.MAIL,
+        subject:"Повідомлення з сайту v1tal4ik",
         text:`Name: ${name},
 Email: <${email}>,
 Phone: ${phone},
