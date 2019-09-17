@@ -1,307 +1,222 @@
+alert('This app use Yandex, use VPN to correctly working app, please !');
+
 ymaps.ready(init);
 
-
-var obj = {};
-var add_btn        = document.getElementById('add-btn');
-var add_coment_btn = document.getElementById('add-coment-btn');
-var close_btn      = document.getElementById('close');
-var coords = 0; //current coordinates Point
-
+const commentsOfPoints = JSON.parse(localStorage.getItem('MapPoints')) || {};
+const addCommentBtn = document.getElementById('add-btn');
+const redirectToComentBtn = document.getElementById('add-coment-btn');
+const closeBtn = document.getElementById('close');
+let clusterer;
+let coords; // Current coords of Point
 
 
 function init() {
-    // Ініціалізація карти
-    var myMap = new ymaps.Map("map", {
-        center: [50.44, 30.51],
-        zoom: 12,
-        controls: ['zoomControl', 'typeSelector', 'searchControl']
+  // initialization map
+  const myMap = new ymaps.Map('map', {
+    center: [50.44, 30.51],
+    zoom: 12,
+    controls: ['zoomControl', 'typeSelector', 'searchControl'],
+  });
+
+
+  // create clusterer
+  clusterer = new ymaps.Clusterer({
+    preset: 'islands#redClusterIcons',
+    groupByCoordinates: false,
+    clusterDisableClickZoom: true,
+    openBalloonOnClick: false,
+  });
+
+
+  // add clusterer to map
+  myMap.geoObjects.add(clusterer);
+  renderPointsOfClusterer();
+
+
+  // get coords on click
+  myMap.events.add('click', async (e) => {
+    coords = e.get('coords');
+    const address = await getAddress(coords);
+    openModalWindow({ address, coords, type: 'add' });
+  });
+
+  // actions of clusterer on click
+  clusterer.events.add('click', async (e) => {
+    const type = e.get('target').options._name;
+    coords = e.get('target').geometry._coordinates;
+
+
+    if (type === 'geoObject') {
+      const address = await getAddress(coords);
+      openModalWindow({ address, coords, type });
+    }
+
+    if (type === 'cluster') {
+      const points = e.get('target').getGeoObjects();
+      const arrayOfCoordinates = new Set();
+      // create array of points coordinates
+      points.forEach((item) => {
+        const coordsPoint = item.geometry._coordinates.join(',');
+        arrayOfCoordinates.add(coordsPoint);
+      });
+      openModalWindow({ address: ' ', coords: arrayOfCoordinates, type });
+    }
+  });
+} // innit
+
+
+const openModalWindow = ({ address, coords = '', type }) => {
+  document.querySelector('.window').classList.remove('hide');
+  document.querySelector('.address').textContent = address;
+  const content1 = document.querySelector('.content_1');
+  const content2 = document.querySelector('.content_2');
+
+  if (type === 'add') {
+    content1.classList.remove('hide');
+    content2.classList.add('hide');
+    content1.querySelector('.list').innerHTML = '';
+    document.getElementById('place').value = address;
+    renderComentsOnAddWindow({ coords, type: 'geoObject', add: true });
+  }
+  if (type === 'geoObject' || type === 'cluster') {
+    content1.classList.add('hide');
+    content2.classList.remove('hide');
+    renderComentsOnAddWindow({ coords, type });
+  }
+};
+
+const renderComentsOnAddWindow = ({ coords, type, add }) => {
+  const number = (add) ? 1 : 2;
+  const list = document.querySelector(`.content_${number}`).querySelector('.list');
+  list.innerHTML = '';
+
+  if (type === 'geoObject') {
+    try {
+      commentsOfPoints[coords].forEach((item) => {
+        const element = createLi(item);
+        list.appendChild(element);
+      });
+    } catch (e) {}
+  }
+
+  if (type === 'cluster') {
+    coords.forEach((coords) => {
+      commentsOfPoints[coords].forEach((data) => {
+        list.appendChild(createLi(data));
+      });
     });
+  }
+};
 
 
-    //отримання координат по кліку
-    myMap.events.add('click', (e) => {
-        //console.log('Це клік по карті');
-        coords = e.get('coords');
-        //отримання назви вулиці
-        getAddress(coords).then((address) => {
-            //console.log('address', address);
-            //відкривання модального вікна
-            showWindow(address,coords);
-        });
-    });
-
-    /*створення кластера*/
-    var clusterer = new ymaps.Clusterer({
-        preset: 'islands#redClusterIcons',
-        groupByCoordinates: false,
-        clusterDisableClickZoom: true,
-        openBalloonOnClick: false
-    });
-
-    /* Клік по кластеру */
-    clusterer.events.add('click', (e) => {
-        let type = e.get('target').options._name;
-        
-
-        if (type === 'cluster') {
-            //клік по кластеру
-            //console.log('Це клік по кластеру');
-            let points = e.get('target').getGeoObjects();
-            let coordinates = e.get('target').geometry._coordinates;
-            let array_coordinates = [];
-            //відкривання модального вікна
-                for(let point of points){
-                    if(!(array_coordinates.includes(point.geometry._coordinates))){
-                    array_coordinates.push(point.geometry._coordinates);    
-                    }
-            }
-            showListComents(' ',array_coordinates,true);
-        }
-
-        if (type === 'geoObject') {
-            //клік по мітці
-            //console.log('Це клік по мітці');
-            let coordinates = e.get('target').geometry._coordinates;
-            getAddress(coordinates).then((address) => {
-            //відкривання модального вікна
-            showListComents(address,coordinates);
-        });
-        }
-    });
-
-    ///добавлення кластера на карту
-    myMap.geoObjects.add(clusterer);
-    
-    
-    
-    add_btn.addEventListener('click', e => {
-    let name = document.getElementById('name');
-    let coment = document.getElementById('coment');
-    let data = getTimeNow();
+const renderPointsOfClusterer = () => {
+  for (const prop in commentsOfPoints) {
+    for (let i = 0; i < commentsOfPoints[prop].length; i++) {
+      const coords = prop.split(',');
+      clusterer.add(new ymaps.Placemark(coords, {}));
+    }
+  }
+};
 
 
-    //запис властивостей в обєкт
-        new_Coment = createObj(name.value, place.value, data, coment.value);
-        if (obj[coords]) {
-            obj[coords].push(new_Coment);
-        } else {
-            obj[coords] = [];
-            obj[coords].push(new_Coment);
-        }  
-        renderComents(1,coords);
-    
-    //додавання мітки
-    let point = createPlacemark(coords);
-    clusterer.add(point);
-    //console.log('мітка добавлена');
-        
-        name.value = '';
-        coment.value = '';
+addCommentBtn.addEventListener('click', () => {
+  const name = document.getElementById('name');
+  const place = document.getElementById('place');
+  const comment = document.getElementById('coment');
+  const date = getTimeNow();
+  const newComment = {
+    name: name.value,
+    place: place.value,
+    date,
+    comment: comment.value,
+  };
+
+  if (!commentsOfPoints[coords]) {
+    commentsOfPoints[coords] = [];
+  }
+
+  commentsOfPoints[coords].push(newComment);
+  localStorage.setItem('MapPoints', JSON.stringify(commentsOfPoints));
+  if (typeof (coords) === 'string') {
+    coords = coords.split(',');
+  }
+  clusterer.add(new ymaps.Placemark(coords, {}));
+  renderComentsOnAddWindow({ coords, type: 'geoObject', add: true });
+
+  name.value = '';
+  comment.value = '';
 });
 
-} //innit
-
-
-
-
-
-//фунціонал кнопки add_coment_btn
-add_coment_btn.addEventListener('click',e=>{
-        let address = document.querySelector('.address').textContent;
-        showWindow(address,coords);
+closeBtn.addEventListener('click', (e) => {
+  const window = document.querySelector('.window');
+  window.classList.add('hide');
 });
 
 
-//фунціонал кнопки close_btn
-close_btn.addEventListener('click', e => {
-    let window = document.querySelector('.window');
-    window.classList.add('hide');
-});
-
-/******** Arrow ***********/
-var right = document.getElementById('right');
-var left = document.getElementById('left');
-var counter = 0;
-right.addEventListener('click', e =>{
-    let list = document.querySelector('.content_2').querySelectorAll('.list-item');
-    list[counter].classList.add('hide');
-    list[counter+1].classList.remove('hide');
-    counter+=1;
-    //перевірка чи є далі слайди
-    if(counter === (list.length-1)){
-        right.classList.add('hide');
-        left.classList.remove('hide');
-    }else{
-        left.classList.remove('hide');
+redirectToComentBtn.addEventListener('click', async (e) => {
+  const address = await getAddress(coords);
+  const arr = Object.keys(commentsOfPoints);
+  arr.forEach((item) => {
+    if (commentsOfPoints[item][0].place === address) {
+      coords = item;
     }
-    
-});
-
-left.addEventListener('click', e =>{
-   let list = document.querySelector('.content_2').querySelectorAll('.list-item');
-    list[counter].classList.add('hide');
-    list[counter-1].classList.remove('hide');
-    counter-=1;
-    //перевірка чи є далі слайди
-    if(counter === 0){
-        left.classList.add('hide');
-        right.classList.remove('hide');
-    }else{
-        right.classList.remove('hide');
-    }
+  });
+  openModalWindow({ address, coords, type: 'add' });
 });
 
 
+/** ************************** Helpers function ****************************************** */
+const getAddress = coords => ymaps.geocode(coords).then(answer => answer.geoObjects.get(0).getAddressLine());
 
 
-//створення мітки 
-function createPlacemark(coords) {
-    return new ymaps.Placemark(coords, {});
-}
+const getTimeNow = () => {
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1; // January is 0!
+  const yyyy = today.getFullYear();
 
-//відкриття форми додавання коментаря
-function showWindow(address,coordinates) {
-    let window = document.querySelector('.window');
-        let content_1 = document.querySelector('.content_1');
-        let content_2 = document.querySelector('.content_2');
-        window.classList.remove('hide');
-        content_2.classList.add('hide');
-        content_1.classList.remove('hide');
+  if (dd < 10) {
+    dd = `0${dd}`;
+  }
 
-        //встановлення в поля адрес
-        let address_span = document.querySelector('.address');
-        let place = document.getElementById('place');
-        address_span.textContent = address;
-        place.value = address;
-    
-    renderComents(1,coordinates);
-}
+  if (mm < 10) {
+    mm = `0${mm}`;
+  }
 
-//відкриття форми перегляду
-function showListComents(address,coordinates,select) {
-    let window = document.querySelector('.window');
-    let content_1 = document.querySelector('.content_1');
-    let content_2 = document.querySelector('.content_2');
-    window.classList.remove('hide');
-    content_1.classList.add('hide');
-    content_2.classList.remove('hide');
-    
+  today = `${dd}.${mm}.${yyyy}`;
+  return today;
+};
 
-    let address_span = document.querySelector('.address');
-    address_span.textContent = address;
-    renderComents(2,coordinates,select);
-    }
 
-function renderComents(number, coordinates, select = false) {
-    let curentList;
+const createLi = ({name, place, date, comment,}) => {
+  const li = document.createElement('li');
+  li.classList.add('list-item');
 
-    //номер списку
-    if (number === 1) {
-        curentList = document.querySelector('.content_1').querySelector('.list');
-    }
+  const info = document.createElement('div');
+  info.classList.add('info');
 
-    if (number === 2) {
-        curentList = document.querySelector('.content_2').querySelector('.list');
-    }
-    curentList.innerHTML = '';
-    //масив координат
-    if (select) {
-        //для всіх точок всі коментарі
-        for (let i = 0; i < coordinates.length; i++) {
-            for (let index of obj[coordinates[i]]) {
-                let element = createLi(index.name, index.place, index.data, index.coment)
-                curentList.appendChild(element);
-            }
-        }
-    } else {
-        //всі коментарі для даної точки
-        for (let index of obj[coordinates]) {
-            let element = createLi(index.name, index.place, index.data, index.coment)
-            curentList.appendChild(element);
-        }
-    }
-    clearList();
-}
+  const spanName = document.createElement('span');
+  spanName.classList.add('name');
+  spanName.textContent = `${name}  `;
 
-function getAddress(coords) {
-    return new Promise((resolve) => {
-        ymaps.geocode(coords).then((answer) => {
-            return resolve(answer.geoObjects.get(0).getAddressLine());
-        });
-    });
-}
+  const spanPlace = document.createElement('span');
+  spanPlace.classList.add('place');
+  spanPlace.textContent = `${place}  `;
 
-function getTimeNow() {
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth() + 1; //January is 0!
-    let yyyy = today.getFullYear();
+  const spanDate = document.createElement('span');
+  spanDate.classList.add('date');
+  spanDate.textContent = date;
 
-    if (dd < 10) {
-        dd = '0' + dd
-    }
+  info.appendChild(spanName);
+  info.appendChild(spanPlace);
+  info.appendChild(spanDate);
 
-    if (mm < 10) {
-        mm = '0' + mm
-    }
+  const textDiv = document.createElement('div');
+  textDiv.classList.add('text');
+  textDiv.textContent = comment;
 
-    today = dd + '.' + mm + '.' + yyyy;
-    return today;
-}
+  li.appendChild(info);
+  li.appendChild(textDiv);
 
-function createLi(name, place, data, text) {
-    let li = document.createElement('li');
-    li.classList.add('list-item');
-
-    let info = document.createElement('div');
-    info.classList.add('info');
-
-    let span_name = document.createElement('span');
-    span_name.classList.add('name');
-    span_name.textContent = name + '  ';
-
-    let span_place = document.createElement('span');
-    span_place.classList.add('place');
-    span_place.textContent = place + '  ';
-
-    let span_data = document.createElement('span');
-    span_data.classList.add('data');
-    span_data.textContent = data;
-
-    info.appendChild(span_name);
-    info.appendChild(span_place);
-    info.appendChild(span_data);
-
-    let text_div = document.createElement('div');
-    text_div.classList.add('text');
-    text_div.textContent = text;
-
-    li.appendChild(info);
-    li.appendChild(text_div);
-
-    return li;
-}
-
-function createObj(name, place, data, coment) {
-    let obj = {};
-    obj.name = name;
-    obj.place = place;
-    obj.data = data;
-    obj.coment = coment;
-    //console.log(obj);
-    return obj;
-}
-
-function clearList(){
-    //console.log('work');
-    let list = document.querySelector('.content_2').querySelectorAll('.list-item');
-    for(let i=1; i <list.length;i++){
-        list[i].classList.add('hide');
-    }
-    if(list.length !== 1){
-        right.classList.remove('hide');
-    }else{
-        right.classList.add('hide');
-    }
-}
-
+  return li;
+};
