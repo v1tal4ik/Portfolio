@@ -8,7 +8,7 @@ const app = express();
 
 
 app.use(express.static(path.join(__dirname, './build')))
-    .use('/geoFeedback',express.static(path.join(__dirname,'./build/projects/GeoComent/')))
+    .use('/geoFeedback',express.static(path.join(__dirname,'./build/projects/Geoooooo-Coment/')))
     .use('/friendFilter',express.static(path.join(__dirname,'./build/projects/friendFilter/')))
     .use('/smitter',express.static(path.join(__dirname,'./build/projects/Smitter/')))
     .use(bodyParser.urlencoded({
