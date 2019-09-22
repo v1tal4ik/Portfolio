@@ -39,7 +39,7 @@ export default class ContactMe extends React.Component{
         const re = /@/;
         if(e.target.value.search(re)=== -1){
             this.setState({
-                errorEmail:'* Ваш email повинен містити в собі символ "@"'
+                errorEmail:'* Your email should contain symbol "@"'
             })
         }else{
             this.setState({
@@ -74,11 +74,11 @@ export default class ContactMe extends React.Component{
                 });
         }else{
             if(counter > 11){
-                alert('Номер збережено');
+                alert('Number saved');
             }
             if(counter <11){
                 this.setState({
-                    errorPhone:'* Вводьте тільки цифри'
+                    errorPhone:'* Input only number'
                 });
             }
         }
@@ -104,7 +104,7 @@ export default class ContactMe extends React.Component{
         if(errorEmail !=='' || errorPhone !==''){
             e.preventDefault();
             this.setState({
-                response:'Заповніть усі поля правильно!',
+                response:'Fill in all fields correct, please!',
                 clearAll:false
             });
             this.showFeedback();
@@ -170,41 +170,41 @@ export default class ContactMe extends React.Component{
     render(){
         return (
             <Fragment>
-                 <div className={this.state.class}>
-                <div className="feedback-title" >
-                    <p className="write-me">Напишіть мені</p>
-                    <p className="some-question">Якщо у Вас виникли будь-які питання</p>
+                <div className={this.state.class}>
+                    <div className="feedback-title" >
+                        <p className="write-me">Write email</p>
+                        <p className="some-question">if you have any question</p>
+                    </div>
+                    <form className="feedback-form">
+                        <div className="wrap-inpt">
+                            <label htmlFor="name" className="label-form">Name *</label>
+                            <input type="text" className="feedback-inp" placeholder="Your name" value={this.state.name} onChange={this.handleName} required/>
+                        </div>
+                        <div className="wrap-inpt">
+                            <label htmlFor="name" className="label-form">Email *</label>
+                            <input type="text" className="feedback-inp" placeholder="Your Email" value={this.state.email} 
+                            onChange={this.handleEmail} onBlur={this.checkedEmail} required />
+                            <p className='feedback-form-error'>{this.state.errorEmail}</p>
+                        </div>
+                        <div className="wrap-inpt">
+                            <label htmlFor="name" className="label-form">Number *</label>
+                            <input type="text" className="feedback-inp" placeholder="38 (ХХХ)ХХХ-ХХ-ХХ" 
+                            onKeyPress={this.handlePhone} onChange={this.inputValidNumber}  value={this.state.phone} required />
+                            <span className='clearPhone' onClick={this.onClear}>{this.state.close}</span>
+                            <p className='feedback-form-error'>{this.state.errorPhone}</p>
+                        </div>
+                        <div className="wrap-inpt">
+                        <p htmlFor="name" className="label-form exept">Message:</p>
+                            <textarea className="feedback-inp" name="text" id="" cols="30" rows="8" placeholder="Your message" onChange={this.handleMessage} value={this.state.message} required></textarea>
+                        </div>
+                        <button className="feedback-form-btn" onClick={this.handleSend} >
+                            <span> 
+                                Send
+                                <i className="fab fa-telegram-plane"></i>
+                            </span>
+                        </button>
+                    </form>
                 </div>
-                <form className="feedback-form">
-                    <div className="wrap-inpt">
-                        <label htmlFor="name" className="label-form">Ваше імя *</label>
-                        <input type="text" className="feedback-inp" placeholder="Ваше імя" value={this.state.name} onChange={this.handleName} required/>
-                    </div>
-                    <div className="wrap-inpt">
-                        <label htmlFor="name" className="label-form">Email *</label>
-                        <input type="text" className="feedback-inp" placeholder="Ваш Email" value={this.state.email} 
-                        onChange={this.handleEmail} onBlur={this.checkedEmail} required />
-                        <p className='feedback-form-error'>{this.state.errorEmail}</p>
-                    </div>
-                    <div className="wrap-inpt">
-                        <label htmlFor="name" className="label-form">Телефон *</label>
-                        <input type="text" className="feedback-inp" placeholder="38 (ХХХ)ХХХ-ХХ-ХХ" 
-                        onKeyPress={this.handlePhone} onChange={this.inputValidNumber}  value={this.state.phone} required />
-                        <span className='clearPhone' onClick={this.onClear}>{this.state.close}</span>
-                        <p className='feedback-form-error'>{this.state.errorPhone}</p>
-                    </div>
-                    <div className="wrap-inpt">
-                       <p htmlFor="name" className="label-form exept">Повідомлення:</p>
-                        <textarea className="feedback-inp" name="text" id="" cols="30" rows="8" placeholder="Ваше повідомлення" onChange={this.handleMessage} value={this.state.message} required></textarea>
-                    </div>
-                    <button className="feedback-form-btn" onClick={this.handleSend} >
-						<span> 
-							Надіслати
-							<i className="fab fa-telegram-plane"></i>
-						</span>
-					</button>
-                </form>
-            </div>
             <Rodal visible={this.state.visible} onClose={this.handleCloseFeedback.bind(this)} height={this.state.height}>
                     <ModalFeedback
                         open={this.state.isOpen}

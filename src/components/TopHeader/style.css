@@ -26,7 +26,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 60%;
+    width: 90%;
     color: #000;
 }
 
@@ -140,15 +140,15 @@
 }
 
 @media (max-width: 670px) {
-    .header-ul{
-        display:none;
-    }
-}
+
+} 
 
 
 
 
 /********Mobile ******/
 @media (max-width: 576px) {
-
+    .header-top, .header-ul{
+        display:none;
+    }
 }

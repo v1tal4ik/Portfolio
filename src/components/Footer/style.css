@@ -36,3 +36,26 @@
     width: 20px;
     height: 20px;
 }
+
+/************Responsive *****************/
+@media (max-width: 1024px) {}
+
+@media(max-width: 992px) {}
+
+
+@media(max-width: 768px) {}
+
+
+@media (max-width: 670px) {}
+
+
+
+
+/********Mobile ******/
+@media (max-width: 576px) {}
+
+@media (max-width: 468px) {}
+
+@media (max-width: 420px) {}
+
+@media (max-width: 320px) {}
